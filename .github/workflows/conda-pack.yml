@@ -5,7 +5,7 @@ on:
     
 jobs:      
     mambaforge:
-        name: mambaforge (${{ matrix.os }}, Mambaforge, Python${{ matrix.python-version }})
+        name: mambaforge (${{ matrix.os }}, Mambaforge, Python 3.9
         runs-on: ${{ matrix.os }}-latest
         strategy:
             fail-fast: false
@@ -38,7 +38,7 @@ jobs:
                     miniforge-variant: ${{ matrix.miniforge-variant }}
                     miniforge-version: ${{ matrix.miniforge-version }}
                     python-version: 3.9
-                    python-version: ${{ matrix.python-version }}
+                    # python-version: ${{ matrix.python-version }}
                     use-mamba: true
             
             - name: Install Requirements
@@ -50,7 +50,8 @@ jobs:
                 uses: uibcdf/action-build-and-upload-conda-packages@v1.2.0
                 with:
                     meta_yaml_dir: ./recipe
-                    python-version: ${{ matrix.python-version }}
+                    # python-version: ${{ matrix.python-version }}
+                    python_version: 3.9
                     user: ${{ secrets.CONDA_USER }}
                     label: dev
                     token: ${{ secrets.ANACONDA_TOKEN }}
