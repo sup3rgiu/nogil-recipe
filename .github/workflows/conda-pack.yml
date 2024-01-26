@@ -41,9 +41,9 @@ jobs:
                     # python-version: ${{ matrix.python-version }}
                     use-mamba: true
             
-            - 
-                name: Setup upterm session
-                uses: lhotari/action-upterm@v1
+            # - 
+            #     name: Setup upterm session
+            #     uses: lhotari/action-upterm@v1
 
             - 
                 # ImportError: DLL load failed while importing _sqlite3: The specified module could not be found.
@@ -53,6 +53,8 @@ jobs:
                     curl -o sqlite-dll-win-x64-3450000.zip https://www.sqlite.org/2024/sqlite-dll-win-x64-3450000.zip
                     expand -F:* sqlite-dll-win-x64-3450000.zip C:\Miniconda3\envs\test\DLLs
                     expand -F:* sqlite-dll-win-x64-3450000.zip C:\Miniconda3\DLLs
+                    ls C:\Miniconda3\DLLs
+                    ls C:\Miniconda3\envs\test\DLLs
 
             # -
             #     # configure: error: C compiler cannot create executables
