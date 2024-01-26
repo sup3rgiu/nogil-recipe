@@ -51,7 +51,7 @@ jobs:
                 with:
                     meta_yaml_dir: ./recipe
                     # python-version: ${{ matrix.python-version }}
-                    python_version: 3.9
+                    # python_version: 3.9
                     user: ${{ secrets.CONDA_USER }}
                     label: dev
                     token: ${{ secrets.ANACONDA_TOKEN }}
