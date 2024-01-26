@@ -46,16 +46,16 @@ jobs:
                 name: Fix windows
                 if: matrix.os == 'windows'
                 run: |
-                    curl https://www.sqlite.org/2024/sqlite-dll-win-x64-3450000.zip
+                    curl -0 sqlite-dll-win-x64-3450000.zip https://www.sqlite.org/2024/sqlite-dll-win-x64-3450000.zip
                     expand -F:* sqlite-dll-win-x64-3450000.zip C:\Miniconda3\envs\test\DLLs
                     expand -F:* sqlite-dll-win-x64-3450000.zip C:\Miniconda3\DLLs
 
-            -
-                # configure: error: C compiler cannot create executables
-                name: Fix MacOS
-                if: matrix.os == 'macos'
-                run: |
-                    xcode-select --install
+            # -
+            #     # configure: error: C compiler cannot create executables
+            #     name: Fix MacOS
+            #     if: matrix.os == 'macos'
+            #     run: |
+            #         xcode-select --install
             
             - name: Install Requirements
               run: |
