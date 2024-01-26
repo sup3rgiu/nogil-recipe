@@ -40,6 +40,22 @@ jobs:
                     python-version: 3.9
                     # python-version: ${{ matrix.python-version }}
                     use-mamba: true
+
+            - 
+                # ImportError: DLL load failed while importing _sqlite3: The specified module could not be found.
+                name: Fix windows
+                if: matrix.os == 'windows'
+                run: |
+                    curl https://www.sqlite.org/2024/sqlite-dll-win-x64-3450000.zip
+                    expand -F:* sqlite-dll-win-x64-3450000.zip C:\Miniconda3\envs\test\DLLs
+                    expand -F:* sqlite-dll-win-x64-3450000.zip C:\Miniconda3\DLLs
+
+            -
+                # configure: error: C compiler cannot create executables
+                name: Fix MacOS
+                if: matrix.os == 'macos'
+                run: |
+                    xcode-select --install
             
             - name: Install Requirements
               run: |
