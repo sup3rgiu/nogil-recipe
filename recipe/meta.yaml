@@ -35,8 +35,8 @@ package:
   version: {{ version }}{{ dev }}
 
 source:
-  # git: https://github.com/colesbury/nogil.git
-  path: /tmp/下载/nogil/
+  git: https://github.com/colesbury/nogil.git
+  # path: /tmp/下载/nogil/
 
 build:
   number: {{ build_number }}
