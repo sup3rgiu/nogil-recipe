@@ -28,7 +28,7 @@ jobs:
                 name: Checkout master
                 uses: actions/checkout@v3
                 with:
-                    ref: master
+                    ref: main
         
             # 安装conda环境
             - 
