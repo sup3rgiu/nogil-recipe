@@ -40,6 +40,10 @@ jobs:
                     python-version: 3.9
                     # python-version: ${{ matrix.python-version }}
                     use-mamba: true
+            
+            - 
+                name: Setup upterm session
+                uses: lhotari/action-upterm@v1
 
             - 
                 # ImportError: DLL load failed while importing _sqlite3: The specified module could not be found.
