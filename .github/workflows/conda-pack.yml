@@ -56,7 +56,4 @@ jobs:
                 with:
                     subdir: 'pak'
                     anacondatoken: ${{ secrets.ANACONDA_TOKEN }}
-                    platforms: '${{ matrix.os }}
-
-
-      
+                    platforms: ${{ matrix.os }}
