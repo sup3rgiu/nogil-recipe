@@ -121,7 +121,7 @@ outputs:
 {% endif %}
       host:
         - bzip2
-        - sqlite
+        # - sqlite
         - xz
         - zlib
         - openssl

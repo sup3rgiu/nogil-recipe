@@ -41,21 +41,21 @@ jobs:
                     # python-version: ${{ matrix.python-version }}
                     use-mamba: true
 
-            - 
-                # ImportError: DLL load failed while importing _sqlite3: The specified module could not be found.
-                name: Fix windows
-                if: matrix.os == 'windows'
-                run: |
-                    iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
-                    scoop bucket add main
-                    scoop install main/7zip
-                    curl -o C:\sqlite-dll-win-x64-3450000.zip https://www.sqlite.org/2024/sqlite-dll-win-x64-3450000.zip
-                    # expand -F:* sqlite-dll-win-x64-3450000.zip C:\Miniconda3\envs\test\DLLs
-                    # expand -F:* sqlite-dll-win-x64-3450000.zip C:\Miniconda3\DLLs
-                    7z.exe x -y -oC:\Miniconda3\DLLs C:\sqlite-dll-win-x64-3450000.zip
-                    7z.exe x -y -oC:\Miniconda3\envs\test\DLLs C:\sqlite-dll-win-x64-3450000.zip
-                    ls C:\Miniconda3\DLLs
-                    ls C:\Miniconda3\envs\test\DLLs
+            # - 
+            #     # ImportError: DLL load failed while importing _sqlite3: The specified module could not be found.
+            #     name: Fix windows
+            #     if: matrix.os == 'windows'
+            #     run: |
+            #         iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+            #         scoop bucket add main
+            #         scoop install main/7zip
+            #         curl -o C:\sqlite-dll-win-x64-3450000.zip https://www.sqlite.org/2024/sqlite-dll-win-x64-3450000.zip
+            #         # expand -F:* sqlite-dll-win-x64-3450000.zip C:\Miniconda3\envs\test\DLLs
+            #         # expand -F:* sqlite-dll-win-x64-3450000.zip C:\Miniconda3\DLLs
+            #         7z.exe x -y -oC:\Miniconda3\DLLs C:\sqlite-dll-win-x64-3450000.zip
+            #         7z.exe x -y -oC:\Miniconda3\envs\test\DLLs C:\sqlite-dll-win-x64-3450000.zip
+            #         ls C:\Miniconda3\DLLs
+            #         ls C:\Miniconda3\envs\test\DLLs
             
             # - 
             #     name: Setup upterm session
@@ -75,7 +75,7 @@ jobs:
             - 
                 name: Build the conda packages
                 run: |
-                    conda build . --no-anaconda-upload --output-folder ./pak
+                    conda build . --build-only --output-folder ./pak
 
             - 
                 name: publish-to-conda
