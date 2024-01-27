@@ -1,8 +1,10 @@
 #!/bin/bash
 set -ex
 
+echo "Build start"
+
 # ImportError: DLL load failed while importing _sqlite3: The specified module could not be found.
-if [[ "$CI" = "1" && $(uname -s) =~ (MSYS|MINGW32|MINGW64|CYGWIN_NT) ]]; then
+if [[ "$CI" = "1" && "$(expr substr $(uname -s) 1 10)"=="MINGW32_NT" ]]; then
   iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
   scoop bucket add main
   scoop install main/7zip
