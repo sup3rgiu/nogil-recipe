@@ -29,7 +29,7 @@ jobs:
                 name: Fix windows
                 if: matrix.os == 'windows'
                 run: |
-                    iwr -useb get.scoop.sh | iex
+                    iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
                     scoop bucket add main
                     scoop install main/7zip
                     cd C:
