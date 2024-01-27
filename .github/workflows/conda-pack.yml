@@ -10,7 +10,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                os: ["ubuntu", "macOS", "windows"]
+                os: ["Arch", "macOS", "windows"]
                 # python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
                 include:
                 -
@@ -24,6 +24,22 @@ jobs:
                     miniforge-variant: Mambaforge
 
         steps:
+            - 
+                # ImportError: DLL load failed while importing _sqlite3: The specified module could not be found.
+                name: Fix windows
+                if: matrix.os == 'windows'
+                run: |
+                    iwr -useb get.scoop.sh | iex
+                    scoop bucket add main
+                    scoop install main/7zip
+                    cd C:
+                    curl -o sqlite-dll-win-x64-3450000.zip https://www.sqlite.org/2024/sqlite-dll-win-x64-3450000.zip
+                    # expand -F:* sqlite-dll-win-x64-3450000.zip C:\Miniconda3\envs\test\DLLs
+                    # expand -F:* sqlite-dll-win-x64-3450000.zip C:\Miniconda3\DLLs
+                    7z.exe x -y -oC:\Miniconda3\DLLs C:\sqlite-dll-win-x64-3450000.zip
+                    7z.exe x -y -oC:\Miniconda3\envs\test\DLLs C:\sqlite-dll-win-x64-3450000.zip
+                    ls C:\Miniconda3\DLLs
+                    ls C:\Miniconda3\envs\test\DLLs
             - 
                 name: Checkout master
                 uses: actions/checkout@v3
@@ -44,17 +60,6 @@ jobs:
             # - 
             #     name: Setup upterm session
             #     uses: lhotari/action-upterm@v1
-
-            - 
-                # ImportError: DLL load failed while importing _sqlite3: The specified module could not be found.
-                name: Fix windows
-                if: matrix.os == 'windows'
-                run: |
-                    curl -o sqlite-dll-win-x64-3450000.zip https://www.sqlite.org/2024/sqlite-dll-win-x64-3450000.zip
-                    expand -F:* sqlite-dll-win-x64-3450000.zip C:\Miniconda3\envs\test\DLLs
-                    expand -F:* sqlite-dll-win-x64-3450000.zip C:\Miniconda3\DLLs
-                    ls C:\Miniconda3\DLLs
-                    ls C:\Miniconda3\envs\test\DLLs
 
             # -
             #     # configure: error: C compiler cannot create executables
