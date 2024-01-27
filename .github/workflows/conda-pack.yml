@@ -10,11 +10,11 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                os: ["debian", "macOS", "windows"]
+                os: ["ubuntu", "macOS", "windows"]
                 # python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
                 include:
                 -
-                    os: debian
+                    os: ubuntu
                     miniforge-variant: Mambaforge
                 - 
                     os: macos
@@ -75,12 +75,4 @@ jobs:
             - 
                 name: Build the conda packages
                 run: |
-                    conda build . --build-only --output-folder ./pak
-
-            - 
-                name: publish-to-conda
-                uses: fcakyon/conda-publish-action@v1.3
-                with:
-                    subdir: 'pak'
-                    anacondatoken: ${{ secrets.ANACONDA_TOKEN }}
-                    platforms: ${{ matrix.os }}
+                    conda build . --no-test --output-folder ./pak --token ${{ secrets.ANACONDA_TOKEN }}
