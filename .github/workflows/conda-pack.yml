@@ -10,11 +10,11 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                os: ["Arch", "macOS", "windows"]
+                os: ["debian", "macOS", "windows"]
                 # python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
                 include:
                 -
-                    os: Arch
+                    os: debian
                     miniforge-variant: Mambaforge
                 - 
                     os: macos
