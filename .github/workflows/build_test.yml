@@ -20,6 +20,5 @@ jobs:
                     cd nogil
                     ./configure
                     make -j
-                    mkdir /usr/local/lib/python3.9
-                    make install
+                    sudo make install
             
