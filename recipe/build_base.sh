@@ -3,19 +3,6 @@ set -ex
 
 echo "Build start"
 
-# ImportError: DLL load failed while importing _sqlite3: The specified module could not be found.
-if [[ "$CI" = "1" && "$(expr substr $(uname -s) 1 10)"=="MINGW32_NT" ]]; then
-  iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
-  scoop bucket add main
-  scoop install main/7zip
-  curl -o C:\sqlite-dll-win-x64-3450000.zip https://www.sqlite.org/2024/sqlite-dll-win-x64-3450000.zip
-  7z.exe x -y -oC:\Miniconda3\DLLs C:\sqlite-dll-win-x64-3450000.zip
-  7z.exe x -y -oC:\Miniconda3\envs\test\DLLs C:\sqlite-dll-win-x64-3450000.zip
-  7z.exe x -y -o%PREFIX%\_build_env\DLLs C:\sqlite-dll-win-x64-3450000.zip
-  echo %PREFIX%
-  ls %PREFIX%\_build_env\DLLs
-fi
-
 # Get an updated config.sub and config.guess
 cp $BUILD_PREFIX/share/libtool/build-aux/config.* .
 

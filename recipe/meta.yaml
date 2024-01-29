@@ -95,8 +95,6 @@ outputs:
         - OPENSSL_DIR=%PREFIX%\Library    # [win]
         - SQLITE3_DIR=%PREFIX%\Library    # [win]
 
-          
-
 {% if 'conda-forge' in channel_targets %}
         - CONDA_FORGE=yes
 {% else %}
@@ -124,7 +122,7 @@ outputs:
 {% endif %}
       host:
         - bzip2
-        # - sqlite
+        - sqlite
         - xz
         - zlib
         - openssl
