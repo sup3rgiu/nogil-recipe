@@ -87,9 +87,11 @@ READELF=$(basename "${READELF}")
 
 if [[ ${HOST} =~ .*darwin.* ]] && [[ -n ${CONDA_BUILD_SYSROOT} ]]; then
   # Python's setup.py will figure out that this is a macOS sysroot.
-  CFLAGS="-isysroot ${CONDA_BUILD_SYSROOT} "${CFLAGS}
-  LDFLAGS="-isysroot ${CONDA_BUILD_SYSROOT} "${LDFLAGS}
-  CPPFLAGS="-isysroot ${CONDA_BUILD_SYSROOT} "${CPPFLAGS}
+  # CFLAGS="-isysroot ${CONDA_BUILD_SYSROOT} "${CFLAGS}
+  # LDFLAGS="-isysroot ${CONDA_BUILD_SYSROOT} "${LDFLAGS}
+  # CPPFLAGS="-isysroot ${CONDA_BUILD_SYSROOT} "${CPPFLAGS}
+  CPPFLAGS="-I$(brew --prefix zlib)/include"
+  LDFLAGS="-L$(brew --prefix zlib)/lib"
 fi
 
 # Debian uses -O3 then resets it at the end to -O2 in _sysconfigdata.py
