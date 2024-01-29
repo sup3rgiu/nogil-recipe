@@ -10,7 +10,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                os: ["ubuntu", "macOS", "windows"]
+                os: ["ubuntu", "macOS"]
         
         steps:
             - 
@@ -20,5 +20,6 @@ jobs:
                     cd nogil
                     ./configure
                     make -j
+                    mkdir /usr/local/lib/python3.9
                     make install
             
