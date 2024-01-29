@@ -20,9 +20,9 @@ jobs:
                 - 
                     os: macos
                     miniforge-variant: Mambaforge
-                - 
-                    os: windows
-                    miniforge-variant: Mambaforge
+                # - 
+                #     os: windows
+                #     miniforge-variant: Mambaforge
 
         steps:
             - 
