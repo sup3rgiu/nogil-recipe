@@ -1,5 +1,6 @@
 #!/bin/bash
 set -ex
+set +e
 
 echo "Build start"
 
@@ -509,3 +510,5 @@ rm ${PREFIX}/lib/libpython${VER}.a
 if [[ "$target_platform" == linux-* ]]; then
   rm ${PREFIX}/include/uuid.h
 fi
+
+cat ${PREFIX}/work/build-python-build/config.log

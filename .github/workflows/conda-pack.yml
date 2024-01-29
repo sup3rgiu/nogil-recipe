@@ -76,9 +76,6 @@ jobs:
                     CPPFLAGS="-I$(brew --prefix zlib)/include"
                     LDFLAGS="-L$(brew --prefix zlib)/lib"
                     conda build . --no-test --output-folder ./pak --token ${{ secrets.ANACONDA_TOKEN }}
-                    tree ${PREFIX}
-                    pwd
-                    cat ${PREFIX}/work/build-python-build/config.log
                     
             - 
                 name: Build the conda packages
