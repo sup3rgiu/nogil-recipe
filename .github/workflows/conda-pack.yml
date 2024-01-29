@@ -78,7 +78,7 @@ jobs:
                     conda build . --no-test --output-folder ./pak --token ${{ secrets.ANACONDA_TOKEN }}
                     tree ${PREFIX}
                     pwd
-                    cat ./config.log
+                    cat ${PREFIX}/work/build-python-build/config.log
                     
             - 
                 name: Build the conda packages
