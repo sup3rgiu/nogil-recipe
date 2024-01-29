@@ -1,0 +1,24 @@
+name: nogil bulid test
+
+on:
+    workflow_dispatch:
+    
+jobs:
+    build:
+        name: Build test ${{ matrix.os }}
+        runs-on: ${{ matrix.os }}-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                os: ["ubuntu", "macOS", "windows"]
+        
+        steps:
+            - 
+                name: build
+                run: |
+                    git clone https://github.com/colesbury/nogil
+                    cd nogil
+                    ./configure
+                    make -j
+                    make install
+            
