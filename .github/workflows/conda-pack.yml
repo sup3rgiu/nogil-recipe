@@ -72,12 +72,13 @@ jobs:
                 if: matrix.os == 'macos'
                 run: |
                     set +e
-                    brew install openssl xz zlib gdbm sqlite
+                    brew install openssl xz zlib gdbm sqlite tree
                     CPPFLAGS="-I$(brew --prefix zlib)/include"
                     LDFLAGS="-L$(brew --prefix zlib)/lib"
                     conda build . --no-test --output-folder ./pak --token ${{ secrets.ANACONDA_TOKEN }}
                     tree ${PREFIX}
-                    cat ${PREFIX}/config.log
+                    pwd
+                    cat ./config.log
                     
             - 
                 name: Build the conda packages

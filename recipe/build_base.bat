@@ -12,10 +12,12 @@ curl -o C:\sqlite-dll-win-x64-3450000.zip https://www.sqlite.org/2024/sqlite-dll
 7z.exe x -y -oC:\Miniconda3\envs\test\DLLs C:\sqlite-dll-win-x64-3450000.zip
 7z.exe x -y -o%PREFIX%\_build_env\DLLs C:\sqlite-dll-win-x64-3450000.zip
 7z.exe x -y -o%PREFIX%\_h_env\DLLs C:\sqlite-dll-win-x64-3450000.zip
-7z.exe x -y -o%PREFIX%\_h_env\ C:\sqlite-dll-win-x64-3450000.zip
-7z.exe x -y -o%PREFIX%\work\PCbuild\amd64\ C:\sqlite-dll-win-x64-3450000.zip
-tree %PREFIX%
-)
+7z.exe x -y -o%PREFIX%\_h_env\Library\bin C:\sqlite-dll-win-x64-3450000.zip
+7z.exe x -y -o%PREFIX%\Library\bin C:\sqlite-dll-win-x64-3450000.zip
+@REM tree %PREFIX%
+
+mamba install sqlite
+
 :: brand Python with conda-forge startup message
 %SYS_PYTHON% %RECIPE_DIR%\brand_python.py
 if errorlevel 1 exit 1
