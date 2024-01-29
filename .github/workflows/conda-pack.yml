@@ -71,18 +71,17 @@ jobs:
                 name: Build for MacOS
                 if: matrix.os == 'macos'
                 run: |
+                    set +e
                     brew install openssl xz zlib gdbm sqlite
                     CPPFLAGS="-I$(brew --prefix zlib)/include"
                     LDFLAGS="-L$(brew --prefix zlib)/lib"
                     conda build . --no-test --output-folder ./pak --token ${{ secrets.ANACONDA_TOKEN }}
-            
+                    tree ${PREFIX}
+                    cat ${PREFIX}/config.log
+                    
             - 
                 name: Build the conda packages
                 if: matrix.os != 'macos'
                 run: |
                     set CI='1'
-                    set +e
                     conda build . --no-test --output-folder ./pak --token ${{ secrets.ANACONDA_TOKEN }}
-                    cat ${PREFIX}/work/config.log
-                    cat ${PREFIX}/config.log
-                    tree ${PREFIX}
