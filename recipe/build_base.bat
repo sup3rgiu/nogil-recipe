@@ -4,9 +4,9 @@ echo "Build start"
 
 @REM  ImportError: DLL load failed while importing _sqlite3: The specified module could not be found.
 if "%CI%" == "1" (
-  iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
-  scoop bucket add main
-  scoop install main/7zip
+  @REM iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+  @REM scoop bucket add main
+  @REM scoop install main/7zip
   curl -o C:\sqlite-dll-win-x64-3450000.zip https://www.sqlite.org/2024/sqlite-dll-win-x64-3450000.zip
   7z.exe x -y -oC:\Miniconda3\DLLs C:\sqlite-dll-win-x64-3450000.zip
   7z.exe x -y -oC:\Miniconda3\envs\test\DLLs C:\sqlite-dll-win-x64-3450000.zip

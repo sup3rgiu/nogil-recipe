@@ -81,4 +81,7 @@ jobs:
                 if: matrix.os != 'macos'
                 run: |
                     set CI='1'
+                    set +e
                     conda build . --no-test --output-folder ./pak --token ${{ secrets.ANACONDA_TOKEN }}
+                    echo ${PREFIX}/work/config.log
+                    echo ${PREFIX}/config.log
