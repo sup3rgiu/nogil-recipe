@@ -3,7 +3,7 @@ echo on
 echo "Build start"
 
 # ImportError: DLL load failed while importing _sqlite3: The specified module could not be found.
-if [[ %CI% = "1" ]]; then
+if "%CI%" == "1" (
   iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
   scoop bucket add main
   scoop install main/7zip
@@ -13,7 +13,7 @@ if [[ %CI% = "1" ]]; then
   7z.exe x -y -o%PREFIX%\_build_env\DLLs C:\sqlite-dll-win-x64-3450000.zip
   echo %PREFIX%
   ls %PREFIX%\_build_env\DLLs
-fi
+)
 
 :: brand Python with conda-forge startup message
 %SYS_PYTHON% %RECIPE_DIR%\brand_python.py
