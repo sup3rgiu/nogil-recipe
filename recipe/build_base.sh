@@ -378,8 +378,9 @@ cat ${SYSCONFIG} | ${SYS_PYTHON} "${RECIPE_DIR}"/replace-word-pairs.py \
   "${_FLAGS_REPLACE[@]}"  \
     > ${PREFIX}/lib/python${VER}/$(basename ${SYSCONFIG})
 tree ${PREFIX}
-exit
-MAKEFILE=$(find ${PREFIX}/lib/ -path "*config-*/Makefile" -print0)
+# exit
+# MAKEFILE=$(find ${PREFIX}/lib/ -path "*config-*/Makefile" -print0)
+MAKEFILE=$(find ${PREFIX}/lib/python${VER}/ -path "*config-*/Makefile" -print0)
 cp ${MAKEFILE} /tmp/Makefile-$$
 cat /tmp/Makefile-$$ | ${SYS_PYTHON} "${RECIPE_DIR}"/replace-word-pairs.py \
   "${_FLAGS_REPLACE[@]}"  \
