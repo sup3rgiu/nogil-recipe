@@ -67,6 +67,11 @@ jobs:
               run: |
                   mamba install conda-build anaconda-client
 
+            - name: Fix Linux
+              if: matrix.os == 'ubuntu'
+              run: |
+                sudo apt install gcc g++ make
+
             -
                 # configure: error: C compiler cannot create executables
                 name: Build for MacOS
