@@ -146,25 +146,25 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION}" == "1" ]]; then
   BUILD_PYTHON_PREFIX=${PWD}/build-python-install
   mkdir build-python-build
   pushd build-python-build
-    (unset CPPFLAGS LDFLAGS;
-     export CC=${CC_FOR_BUILD} \
-            CXX=${CXX_FOR_BUILD} \
-            CPP="${CC_FOR_BUILD} -E" \
-            CFLAGS="-O2" \
-            AR="$(${CC_FOR_BUILD} --print-prog-name=ar)" \
-            RANLIB="$(${CC_FOR_BUILD} --print-prog-name=ranlib)" \
-            LD="$(${CC_FOR_BUILD} --print-prog-name=ld)" && \
-      if [[ ${target_platform} == osx-* ]]; then
-        ${SRC_DIR}/configure --build=${BUILD} \
-                             --host=${BUILD} \
-                             --prefix=${BUILD_PYTHON_PREFIX} \
-                             --with-tzpath=${PREFIX}/share/zoneinfo \
-                             --with-platlibdir=lib && \
-      else
-        ${SRC_DIR}/configure --prefix=${BUILD_PYTHON_PREFIX}
-      fi
-      make -j${CPU_COUNT} && \
-      make install)
+  unset CPPFLAGS LDFLAGS;
+  export CC=${CC_FOR_BUILD} \
+        CXX=${CXX_FOR_BUILD} \
+        CPP="${CC_FOR_BUILD} -E" \
+        CFLAGS="-O2" \
+        AR="$(${CC_FOR_BUILD} --print-prog-name=ar)" \
+        RANLIB="$(${CC_FOR_BUILD} --print-prog-name=ranlib)" \
+        LD="$(${CC_FOR_BUILD} --print-prog-name=ld)" && \
+  if [[ ${target_platform} == osx-* ]]; then
+    ${SRC_DIR}/configure --build=${BUILD} \
+                          --host=${BUILD} \
+                          --prefix=${BUILD_PYTHON_PREFIX} \
+                          --with-tzpath=${PREFIX}/share/zoneinfo \
+                          --with-platlibdir=lib && \
+  else
+    ${SRC_DIR}/configure --prefix=${BUILD_PYTHON_PREFIX}
+  fi
+  make -j${CPU_COUNT} && \
+  make install
     export PATH=${BUILD_PYTHON_PREFIX}/bin:${PATH}
     ln -s ${BUILD_PYTHON_PREFIX}/bin/python${VER} ${BUILD_PYTHON_PREFIX}/bin/python
   popd
