@@ -158,11 +158,10 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION}" == "1" ]]; then
         ${SRC_DIR}/configure --build=${BUILD} \
                              --host=${BUILD} \
                              --prefix=${BUILD_PYTHON_PREFIX} \
-                             --with-ensurepip=no \
                              --with-tzpath=${PREFIX}/share/zoneinfo \
                              --with-platlibdir=lib && \
       else
-        ${SRC_DIR}/configure --with-ensurepip=no \
+        ${SRC_DIR}/configure \
                             --prefix=${BUILD_PYTHON_PREFIX}
       fi
       make -j${CPU_COUNT} && \
@@ -250,7 +249,7 @@ _common_configure_args+=(--prefix=${PREFIX})
 _common_configure_args+=(--build=${BUILD})
 _common_configure_args+=(--host=${HOST})
 _common_configure_args+=(--enable-ipv6)
-_common_configure_args+=(--with-ensurepip=no)
+# _common_configure_args+=(--with-ensurepip=no)
 _common_configure_args+=(--with-tzpath=${PREFIX}/share/zoneinfo)
 _common_configure_args+=(--with-computed-gotos)
 _common_configure_args+=(--with-system-ffi)
