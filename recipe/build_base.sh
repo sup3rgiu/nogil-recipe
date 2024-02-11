@@ -161,8 +161,7 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION}" == "1" ]]; then
                              --with-tzpath=${PREFIX}/share/zoneinfo \
                              --with-platlibdir=lib && \
       else
-        ${SRC_DIR}/configure \
-                            --prefix=${BUILD_PYTHON_PREFIX}
+        ${SRC_DIR}/configure --prefix=${BUILD_PYTHON_PREFIX}
       fi
       make -j${CPU_COUNT} && \
       make install)
