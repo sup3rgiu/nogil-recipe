@@ -154,15 +154,16 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION}" == "1" ]]; then
         AR="$(${CC_FOR_BUILD} --print-prog-name=ar)" \
         RANLIB="$(${CC_FOR_BUILD} --print-prog-name=ranlib)" \
         LD="$(${CC_FOR_BUILD} --print-prog-name=ld)" && \
-  if [[ ${target_platform} == osx-* ]]; then
-    ${SRC_DIR}/configure --build=${BUILD} \
-                          --host=${BUILD} \
-                          --prefix=${BUILD_PYTHON_PREFIX} \
-                          --with-tzpath=${PREFIX}/share/zoneinfo \
-                          --with-platlibdir=lib && \
-  else
-    ${SRC_DIR}/configure --prefix=${BUILD_PYTHON_PREFIX}
-  fi
+  ${SRC_DIR}/configure --prefix=${BUILD_PYTHON_PREFIX}
+  # if [[ ${target_platform} == osx-* ]]; then
+  #   ${SRC_DIR}/configure --build=${BUILD} \
+  #                         --host=${BUILD} \
+  #                         --prefix=${BUILD_PYTHON_PREFIX} \
+  #                         --with-tzpath=${PREFIX}/share/zoneinfo \
+  #                         --with-platlibdir=lib && \
+  # else
+  #   ${SRC_DIR}/configure --prefix=${BUILD_PYTHON_PREFIX}
+  # fi
   make -j${CPU_COUNT} && \
   make install
     export PATH=${BUILD_PYTHON_PREFIX}/bin:${PATH}
