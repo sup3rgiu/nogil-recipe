@@ -159,9 +159,8 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION}" == "1" ]]; then
       #                      --with-ensurepip=no \
       #                      --with-tzpath=${PREFIX}/share/zoneinfo \
       #                      --with-platlibdir=lib && \
-      # ${SRC_DIR}/configure --with-ensurepip=no \
-      #                      --prefix=${BUILD_PYTHON_PREFIX}
-      ${SRC_DIR}/configure --prefix=${BUILD_PYTHON_PREFIX}
+      ${SRC_DIR}/configure --with-ensurepip=no \
+                           --prefix=${BUILD_PYTHON_PREFIX}
       make -j${CPU_COUNT} && \
       make install)
     export PATH=${BUILD_PYTHON_PREFIX}/bin:${PATH}
