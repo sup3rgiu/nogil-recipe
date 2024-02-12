@@ -1,6 +1,5 @@
 #!/bin/bash
 set -ex
-set +e
 
 echo "Build start"
 
@@ -146,26 +145,25 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION}" == "1" ]]; then
   BUILD_PYTHON_PREFIX=${PWD}/build-python-install
   mkdir build-python-build
   pushd build-python-build
-  unset CPPFLAGS LDFLAGS;
-  export CC=${CC_FOR_BUILD} \
-        CXX=${CXX_FOR_BUILD} \
-        CPP="${CC_FOR_BUILD} -E" \
-        CFLAGS="-O2" \
-        AR="$(${CC_FOR_BUILD} --print-prog-name=ar)" \
-        RANLIB="$(${CC_FOR_BUILD} --print-prog-name=ranlib)" \
-        LD="$(${CC_FOR_BUILD} --print-prog-name=ld)" && \
-  ${SRC_DIR}/configure --prefix=${BUILD_PYTHON_PREFIX}
-  # if [[ ${target_platform} == osx-* ]]; then
-  #   ${SRC_DIR}/configure --build=${BUILD} \
-  #                         --host=${BUILD} \
-  #                         --prefix=${BUILD_PYTHON_PREFIX} \
-  #                         --with-tzpath=${PREFIX}/share/zoneinfo \
-  #                         --with-platlibdir=lib && \
-  # else
-  #   ${SRC_DIR}/configure --prefix=${BUILD_PYTHON_PREFIX}
-  # fi
-  make -j${CPU_COUNT} && \
-  make install
+    (unset CPPFLAGS LDFLAGS;
+     export CC=${CC_FOR_BUILD} \
+            CXX=${CXX_FOR_BUILD} \
+            CPP="${CC_FOR_BUILD} -E" \
+            CFLAGS="-O2" \
+            AR="$(${CC_FOR_BUILD} --print-prog-name=ar)" \
+            RANLIB="$(${CC_FOR_BUILD} --print-prog-name=ranlib)" \
+            LD="$(${CC_FOR_BUILD} --print-prog-name=ld)" && \
+      # ${SRC_DIR}/configure --build=${BUILD} \
+      #                      --host=${BUILD} \
+      #                      --prefix=${BUILD_PYTHON_PREFIX} \
+      #                      --with-ensurepip=no \
+      #                      --with-tzpath=${PREFIX}/share/zoneinfo \
+      #                      --with-platlibdir=lib && \
+      # ${SRC_DIR}/configure --with-ensurepip=no \
+      #                      --prefix=${BUILD_PYTHON_PREFIX}
+      ${SRC_DIR}/configure --prefix=${BUILD_PYTHON_PREFIX}
+      make -j${CPU_COUNT} && \
+      make install)
     export PATH=${BUILD_PYTHON_PREFIX}/bin:${PATH}
     ln -s ${BUILD_PYTHON_PREFIX}/bin/python${VER} ${BUILD_PYTHON_PREFIX}/bin/python
   popd
@@ -249,7 +247,7 @@ _common_configure_args+=(--prefix=${PREFIX})
 _common_configure_args+=(--build=${BUILD})
 _common_configure_args+=(--host=${HOST})
 _common_configure_args+=(--enable-ipv6)
-# _common_configure_args+=(--with-ensurepip=no)
+_common_configure_args+=(--with-ensurepip=no)
 _common_configure_args+=(--with-tzpath=${PREFIX}/share/zoneinfo)
 _common_configure_args+=(--with-computed-gotos)
 _common_configure_args+=(--with-system-ffi)
