@@ -159,7 +159,8 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION}" == "1" ]]; then
       #                      --with-ensurepip=no \
       #                      --with-tzpath=${PREFIX}/share/zoneinfo \
       #                      --with-platlibdir=lib && \
-      ${SRC_DIR}/configure --with-ensurepip=no \
+      ${SRC_DIR}/configure --with-ensurepip=install \
+                           --enable-optimizations \
                            --prefix=${BUILD_PYTHON_PREFIX}
       make -j${CPU_COUNT} && \
       make install)
@@ -225,7 +226,7 @@ fi
 
 # Not used at present but we should run 'make test' and finish up TESTOPTS (see debians rules).
 declare -a TEST_EXCLUDES
-TEST_EXCLUDES+=(test_ensurepip test_venv)
+TEST_EXCLUDES+=(test_venv)
 TEST_EXCLUDES+=(test_tcl test_codecmaps_cn test_codecmaps_hk
                 test_codecmaps_jp test_codecmaps_kr test_codecmaps_tw
                 test_normalization test_ossaudiodev test_socket)
@@ -246,7 +247,7 @@ _common_configure_args+=(--prefix=${PREFIX})
 _common_configure_args+=(--build=${BUILD})
 _common_configure_args+=(--host=${HOST})
 _common_configure_args+=(--enable-ipv6)
-_common_configure_args+=(--with-ensurepip=no)
+_common_configure_args+=(--with-ensurepip=install)
 _common_configure_args+=(--with-tzpath=${PREFIX}/share/zoneinfo)
 _common_configure_args+=(--with-computed-gotos)
 _common_configure_args+=(--with-system-ffi)
